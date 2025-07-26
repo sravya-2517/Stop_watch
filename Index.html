@@ -1,0 +1,90 @@
+!DOCTYPE html>
+<html>
+<head>
+  <title>Stopwatch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #display {
+      font-size: 48px;
+      margin: 20px;
+      color: #000;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stopwatch</h1>
+  <div id="display">00:00:00</div>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+
+  <script>
+    let seconds = 0;
+    let timer = null;
+
+    function formatTime(sec) {
+      let hrs = Math.floor(sec / 3600);
+      let mins = Math.floor((sec % 3600) / 60);
+      let secs = sec % 60;
+
+      return (
+        String(hrs).padStart(2, '0') + ':' +
+        String(mins).padStart(2, '0') + ':' +
+        String(secs).padStart(2, '0')
+      );
+    }
+
+    function updateDisplay() {
+      document.getElementById("display").textContent = formatTime(seconds);
+    }
+
+    function start() {
+      if (timer === null) {
+        timer = setInterval(() => {
+          seconds++;
+          updateDisplay();
+        }, 1000);
+      }
+    }
+
+    function stop() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function reset() {
+      stop();
+      seconds = 0;
+      updateDisplay();
+    }
+  </script>
+
+</body>
+    </html>
+  
